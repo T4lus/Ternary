@@ -6,6 +6,18 @@
 ### Special Registers
 
 ## Memory and Addressing Modes
+### Declaring Static Data Regions
+You can declare static data regions (analogous to global variables) using the directives DD can be used to declare one **Tryte** data locations. Declared locations can be labeled with names for later reference — this is similar to declaring variables by name, but abides by some lower level rules. For example, locations declared in sequence will be located in memory next to one another.
+
+Example declarations:
+
+		    DD 42		;Declare a tryte with no label, containing the value 42
+    test:	DD 3xZC0	;Declare a tryte labeled 'test' containing the heptavintimal
+    chr: 	DD 'c'		;Declare a tryte labeled 'chr' containing the ascii value of 'c'
+    str: 	DD "Hello"	;Declare a succession of 5 trytes, labeled 'str', representing the ascii value of Hello
+
+### Addressing Memory
+### Size Directives
 
 ## Instructions
 Machine instructions generally fall into several categories: data movement, arithmetic, logic, control-flow, and CPU-control. 
@@ -20,22 +32,6 @@ We use the following notation:
 `<const27>` Any 27-trit constant
 `<const9>` Any 9-trit constant
 `<const3>` Any 3-trit constant
-
-
-### Data Declaration
-
-Defines data in memory. Data can either be a single number, character or a string.
-
-Syntax :
-
-    DD [specifier] <const>
-
-Example :
-
-    DD 0xZC3
-    DD $tryble 0x3
-    DD $tryte 0xZC3
-    DD $word 0x000000ZC3
 
 ### CPU Control
 #### NOP
@@ -190,6 +186,26 @@ Syntax :
 	DEC reg
 
 #### ADD
+The add instruction adds together its two operands, storing the result in its first operand. Note, whereas both operands may be registers, at most one operand may be a memory location.
+
+Syntax:
+
+    ADD <reg>,<reg>  
+	ADD <reg>,<addr>   
+	ADD <reg>,<const>  
+	ADD <addr>,<reg> 
+	ADD <addr>,<const>
+
 #### SUB
+The sub instruction stores in the value of its first operand the result of subtracting the value of its second operand from the value of its first operand. As with add
+
+Syntax:
+
+    SUB <reg>,<reg>  
+	SUB <reg>,<addr>   
+	SUB <reg>,<const>  
+	SUB <addr>,<reg> 
+	SUB <addr>,<const>
+	
 #### MUL
 #### DIV
